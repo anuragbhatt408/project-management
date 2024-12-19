@@ -5,18 +5,23 @@ import ProjectHeader from "../ProjectHeader";
 import Board from "../BoardView/index";
 import List from "../ListView/index";
 import Timeline from "../TimelineView/index";
+import Table from "../TableView/index";
+import ModalNewTask from "@/components/ModalNewTask/index";
+import { useParams } from "next/navigation";
 
-type Props = {
-  params: { id: string };
-};
-
-const Project = ({ params }: Props) => {
-  const { id } = React.use(params);
+const Project = () => {
+  // const { id } = params;
+  const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState("Board");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
   return (
     <div>
       {/* MODAL NEW TASKS */}
+      <ModalNewTask
+        id={id}
+        isOpen={isModalNewTaskOpen}
+        onClose={() => setIsModalNewTaskOpen(false)}
+      />
 
       {/* Projects Tab */}
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -29,9 +34,9 @@ const Project = ({ params }: Props) => {
       {activeTab === "Timeline" && (
         <Timeline id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
       )}
-      {/* {activeTab === "Table" && (
+      {activeTab === "Table" && (
         <Table id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
-      )} */}
+      )}
     </div>
   );
 };

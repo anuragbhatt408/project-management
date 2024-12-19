@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetTaskQuery, useUpdateTaskStatusMutation } from "@/app/state/api";
 import React from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
